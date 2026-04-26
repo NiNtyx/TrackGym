@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ios-blue: #007AFF;
+    --ios-green: #30D158;
+    --ios-orange: #FF9F0A;
+    --ios-red: #FF3B30;
+    --bg-primary: #F2F2F7;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #E5E5EA;
+    --text-primary: #000000;
+    --text-secondary: #3C3C43;
+    --text-tertiary: #8E8E93;
+    --separator: rgba(60,60,67,0.12);
+    --glass-bg: rgba(255,255,255,0.72);
+    --glass-border: rgba(255,255,255,0.6);
+    --glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+
+  .dark {
+    --bg-primary: #000000;
+    --bg-secondary: #1C1C1E;
+    --bg-tertiary: #2C2C2E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #EBEBF599;
+    --text-tertiary: #8E8E93;
+    --separator: rgba(84,84,88,0.4);
+    --glass-bg: rgba(28,28,30,0.75);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+
+  html { height: 100%; height: -webkit-fill-available; }
+
+  body {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type="number"] { -moz-appearance: textfield; }
+}
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .ios-separator { border-bottom: 1px solid var(--separator); }
+
+  .safe-top { padding-top: env(safe-area-inset-top, 44px); }
+  .safe-bottom-nav { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 84px); }
+
+  .tab-bar {
+    height: calc(84px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+}
+
+@layer utilities {
+  .text-ios-blue { color: var(--ios-blue); }
+  .text-ios-green { color: var(--ios-green); }
+  .text-ios-orange { color: var(--ios-orange); }
+  .text-ios-red { color: var(--ios-red); }
+  .bg-ios-blue { background-color: var(--ios-blue); }
+  .bg-ios-green { background-color: var(--ios-green); }
+  .bg-ios-orange { background-color: var(--ios-orange); }
+  .bg-primary { background-color: var(--bg-primary); }
+  .bg-secondary { background-color: var(--bg-secondary); }
+  .bg-tertiary { background-color: var(--bg-tertiary); }
+  .text-primary { color: var(--text-primary); }
+  .text-secondary-ios { color: var(--text-secondary); }
+  .text-tertiary-ios { color: var(--text-tertiary); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
