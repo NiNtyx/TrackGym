@@ -44,11 +44,12 @@ function useInstallPrompt() {
   return { canInstall: !!prompt, install };
 }
 
-// Service Worker registration
 function useServiceWorker() {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      navigator.serviceWorker
+        .register(`${import.meta.env.BASE_URL}sw.js`)
+        .catch(() => {});
     }
   }, []);
 }
@@ -59,9 +60,9 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 const TAB_TRANSITIONS = {
-  enter: { opacity: 0, x: 20 },
+  enter: { opacity: 0, x: 16 },
   center: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -20 },
+  exit: { opacity: 0, x: -16 },
 };
 
 function AppInner() {
@@ -74,7 +75,7 @@ function AppInner() {
 
   return (
     <div
-      className="relative min-h-screen"
+      className="relative min-h-screen overflow-x-hidden"
       style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
     >
       {/* Install banner */}
@@ -111,7 +112,7 @@ function AppInner() {
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ duration: 0.2, ease: 'easeOut' }}
+          transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
         >
           {tab === 'seance' && <SeanceTab />}
           {tab === 'stats' && <StatsTab state={state} />}
