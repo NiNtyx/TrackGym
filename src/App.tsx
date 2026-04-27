@@ -7,6 +7,7 @@ import { CalendarTab } from './tabs/Calendar';
 import { TimersTab } from './tabs/Timers';
 import { ReglagesTab } from './tabs/Reglages';
 import { StoreProvider, useStoreContext } from './store/StoreContext';
+import { HomeScreen } from './components/HomeScreen';
 
 function useTheme(theme: 'light' | 'dark' | 'auto') {
   useEffect(() => {
@@ -59,6 +60,24 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
 }
 
+function useHomeScreen() {
+  const todayKey = new Date().toISOString().slice(0, 10);
+  const [show, setShow] = useState(() => {
+    try {
+      return localStorage.getItem('home_seen_date') !== todayKey;
+    } catch {
+      return true;
+    }
+  });
+  const dismiss = () => {
+    try {
+      localStorage.setItem('home_seen_date', todayKey);
+    } catch {}
+    setShow(false);
+  };
+  return { show, dismiss };
+}
+
 const TAB_TRANSITIONS = {
   enter: { opacity: 0, x: 16 },
   center: { opacity: 1, x: 0 },
@@ -72,6 +91,7 @@ function AppInner() {
   useTheme(state.settings.theme);
   useServiceWorker();
   const { canInstall, install } = useInstallPrompt();
+  const { show: showHome, dismiss: dismissHome } = useHomeScreen();
 
   return (
     <div
