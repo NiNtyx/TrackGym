@@ -63,8 +63,8 @@ export function FreeLogSection({ entries, onAdd, onClose }: FreeLogSectionProps)
 
           {/* Sets */}
           {sets.map((set, i) => (
-            <div key={i} className="flex gap-2 mb-2">
-              <span className="w-6 flex items-center justify-center text-xs font-bold" style={{ color: 'var(--text-tertiary)' }}>
+            <div key={i} className="flex gap-2 mb-2 items-center">
+              <span className="w-5 shrink-0 flex items-center justify-center text-xs font-bold" style={{ color: 'var(--text-tertiary)' }}>
                 {i + 1}
               </span>
               <input
@@ -73,7 +73,7 @@ export function FreeLogSection({ entries, onAdd, onClose }: FreeLogSectionProps)
                 placeholder="kg"
                 value={set.weight ?? ''}
                 onChange={(e) => updateSet(i, 'weight', e.target.value)}
-                className="flex-1 text-center px-2 py-2 rounded-xl text-sm outline-none"
+                className="flex-1 min-w-0 text-center px-2 py-2 rounded-xl text-sm outline-none"
                 style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
               />
               <input
@@ -82,13 +82,13 @@ export function FreeLogSection({ entries, onAdd, onClose }: FreeLogSectionProps)
                 placeholder="reps"
                 value={set.reps ?? ''}
                 onChange={(e) => updateSet(i, 'reps', e.target.value)}
-                className="flex-1 text-center px-2 py-2 rounded-xl text-sm outline-none"
+                className="flex-1 min-w-0 text-center px-2 py-2 rounded-xl text-sm outline-none"
                 style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
               />
               <motion.button
                 whileTap={{ scale: 0.88 }}
                 onClick={() => setSets((prev) => prev.filter((_, idx) => idx !== i))}
-                className="w-8 flex items-center justify-center"
+                className="w-7 h-9 shrink-0 flex items-center justify-center"
               >
                 <Trash2 size={14} style={{ color: 'var(--ios-red)' }} />
               </motion.button>
